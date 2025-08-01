@@ -21,4 +21,11 @@ export class AppController {
       status: 1000,
     };
   }
+
+  @Get('test2')
+  getTest2(): { status: number } {
+    return {
+      status: 2000,
+    };
+  }
 } 

@@ -34,4 +34,11 @@ describe('AppController', () => {
       expect(result.status).toBe(1000);
     });
   });
+
+  describe('test2', () => {
+    it('should return test2 status', () => {
+      const result = appController.getTest2();
+      expect(result.status).toBe(2000);
+    });
+  });
 }); 
