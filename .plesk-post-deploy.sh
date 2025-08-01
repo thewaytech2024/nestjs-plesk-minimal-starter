@@ -23,11 +23,16 @@ else
     exit 1
 fi
 
-# Build the application
+# Clean and build the application
+echo "🧹 Cleaning previous build..." >> $LOG_FILE
+rm -rf dist/ >> $LOG_FILE 2>&1
+
 echo "🔨 Building application..." >> $LOG_FILE
 npm run build >> $LOG_FILE 2>&1
 if [ $? -eq 0 ]; then
     echo "✅ Application built successfully" >> $LOG_FILE
+    echo "📁 Build output:" >> $LOG_FILE
+    ls -la dist/ >> $LOG_FILE 2>&1
 else
     echo "❌ Failed to build application" >> $LOG_FILE
     exit 1
