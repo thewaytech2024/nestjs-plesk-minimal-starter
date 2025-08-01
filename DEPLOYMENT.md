@@ -22,7 +22,7 @@
 #### Node.js Application
 1. **Enable Node.js:**
    - Go to "Node.js" in Plesk
-   - Select Node.js version: **18** or **20**
+   - Select Node.js version: **22** (recommended), **20**, or **18**
    - Startup File: `dist/main.js`
    - Application Mode: **Production**
 
@@ -61,9 +61,30 @@ After deployment, test:
 - **Port conflicts:** Check if port 3000 is available
 - **Build failures:** Verify Node.js version (18 or 20)
 - **Permission errors:** Ensure `.plesk-post-deploy.sh` is executable
+- **npm not found:** Check if Node.js is properly installed in Plesk
+
+**npm Issues:**
+If you see "npm: command not found" error:
+1. **Check Node.js installation in Plesk:**
+   - Go to Plesk → Domains → your-domain → Node.js
+   - Ensure Node.js is enabled and version is set (22, 20, or 18)
+   - Check "Application Mode" is set to "Production"
+
+2. **Alternative deployment script:**
+   - If the main script fails, try using `.plesk-post-deploy-fallback.sh`
+   - This script searches for npm in multiple locations
+
+3. **Manual deployment:**
+   ```bash
+   # SSH into Plesk server
+   cd /path/to/application
+   /opt/plesk/node/22/bin/npm install
+   /opt/plesk/node/22/bin/npm run build
+   ```
 
 **Logs:**
 - Check Plesk application logs
+- Check `plesk-deploy.log` for detailed deployment logs
 - Verify startup file path: `dist/main.js`
 
 ### 7. Updates

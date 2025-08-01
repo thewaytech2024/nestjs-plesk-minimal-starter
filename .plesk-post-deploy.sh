@@ -15,7 +15,29 @@ echo "📁 Current directory: $(pwd)" >> $LOG_FILE
 
 # Install dependencies
 echo "📦 Installing dependencies..." >> $LOG_FILE
-npm install >> $LOG_FILE 2>&1
+
+# Try different npm paths
+NPM_CMD=""
+if command -v npm >/dev/null 2>&1; then
+    NPM_CMD="npm"
+elif [ -f "/opt/plesk/node/22/bin/npm" ]; then
+    NPM_CMD="/opt/plesk/node/22/bin/npm"
+elif [ -f "/opt/plesk/node/20/bin/npm" ]; then
+    NPM_CMD="/opt/plesk/node/20/bin/npm"
+elif [ -f "/opt/plesk/node/18/bin/npm" ]; then
+    NPM_CMD="/opt/plesk/node/18/bin/npm"
+elif [ -f "/usr/local/bin/npm" ]; then
+    NPM_CMD="/usr/local/bin/npm"
+else
+    echo "❌ npm not found in PATH or common locations" >> $LOG_FILE
+    echo "🔍 Available node/npm installations:" >> $LOG_FILE
+    find /opt/plesk -name "npm" 2>/dev/null >> $LOG_FILE
+    find /usr/local -name "npm" 2>/dev/null >> $LOG_FILE
+    exit 1
+fi
+
+echo "🔧 Using npm: $NPM_CMD" >> $LOG_FILE
+$NPM_CMD install >> $LOG_FILE 2>&1
 if [ $? -eq 0 ]; then
     echo "✅ Dependencies installed successfully" >> $LOG_FILE
 else
@@ -28,7 +50,7 @@ echo "🧹 Cleaning previous build..." >> $LOG_FILE
 rm -rf dist/ >> $LOG_FILE 2>&1
 
 echo "🔨 Building application..." >> $LOG_FILE
-npm run build >> $LOG_FILE 2>&1
+$NPM_CMD run build >> $LOG_FILE 2>&1
 if [ $? -eq 0 ]; then
     echo "✅ Application built successfully" >> $LOG_FILE
     echo "📁 Build output:" >> $LOG_FILE
