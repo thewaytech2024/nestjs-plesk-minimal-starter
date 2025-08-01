@@ -53,6 +53,7 @@ The `.plesk-post-deploy.sh` script will automatically:
 After deployment, test:
 - `https://member-api-dev.thaibible.or.th/` → "Hello World!"
 - `https://member-api-dev.thaibible.or.th/health` → Health status
+- `https://member-api-dev.thaibible.or.th/test` → `{"status":1000}`
 
 ### 6. Troubleshooting
 

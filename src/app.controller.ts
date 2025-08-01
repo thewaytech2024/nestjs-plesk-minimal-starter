@@ -14,4 +14,11 @@ export class AppController {
       timestamp: new Date().toISOString(),
     };
   }
+
+  @Get('test')
+  getTest(): { status: number } {
+    return {
+      status: 1000,
+    };
+  }
 } 

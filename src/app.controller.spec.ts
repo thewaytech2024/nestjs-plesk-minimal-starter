@@ -27,4 +27,11 @@ describe('AppController', () => {
       expect(new Date(result.timestamp).getTime()).toBeGreaterThan(0);
     });
   });
+
+  describe('test', () => {
+    it('should return test status', () => {
+      const result = appController.getTest();
+      expect(result.status).toBe(1000);
+    });
+  });
 }); 

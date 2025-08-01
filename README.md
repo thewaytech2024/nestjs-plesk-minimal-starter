@@ -43,6 +43,7 @@ A lightweight NestJS backend project optimized for Plesk deployment on `member-a
 
 - `GET /` - Returns "Hello World!"
 - `GET /health` - Health check endpoint
+- `GET /test` - Test endpoint returning `{status: 1000}`
 
 ## 🚀 Plesk Deployment
 
