@@ -58,4 +58,7 @@ dist
 
 # Temporary folders
 tmp/
-temp/ 
+temp/
+
+# Plesk deployment logs
+plesk-deploy.log 
