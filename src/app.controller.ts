@@ -28,4 +28,11 @@ export class AppController {
       status: 2000,
     };
   }
+
+  @Get('test3')
+  getTest3(): { status: number } {
+    return {
+      status: 3000,
+    };
+  }
 } 
